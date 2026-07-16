@@ -175,6 +175,22 @@ h1{font-size:var(--text-2xl)}
 .verified{display:inline-flex;align-items:center;gap:.3em;font-size:var(--text-xs);
   color:var(--color-primary);margin-left:.4em}
 
+/* GALLERY */
+.gallery-groups{display:grid;gap:var(--space-8)}
+.gallery-group h3{font-size:var(--text-lg);margin-bottom:.15rem}
+.gallery-group .g-sub{font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3)}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3)}
+.photo{display:flex;flex-direction:column;border-radius:var(--radius-md);overflow:hidden;
+  background:var(--color-surface);
+  border:1px solid color-mix(in srgb,var(--color-text) 9%,transparent);box-shadow:var(--shadow-sm)}
+.photo img{width:100%;height:190px;object-fit:cover;background:var(--color-surface-offset)}
+.photo figcaption{padding:.5rem .7rem;font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.5}
+.photo figcaption a{font-weight:600}
+.gallery-note{margin-top:var(--space-6);padding:var(--space-4) var(--space-5);border-radius:var(--radius-lg);
+  background:var(--color-primary-highlight);font-size:var(--text-xs);color:var(--color-text-muted)}
+@media(max-width:900px){ .photo-grid{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:560px){ .photo-grid{grid-template-columns:1fr} }
+
 /* NOTES */
 .warn-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-5)}
 .warn-card h3{font-size:var(--text-base);margin-bottom:.6rem}
@@ -215,6 +231,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       <a href="#overview">總覽</a>
       <a href="#itinerary">每日行程</a>
       <a href="#spots">重點地點</a>
+      <a href="#gallery">景點預覽</a>
       <a href="#routemap">路線圖</a>
       <a href="#notes">注意事項</a>
     </nav>
@@ -627,6 +644,161 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       </article>
 
     </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" id="gallery">
+  <div class="container">
+    <div class="section-head">
+      <h2>景點預覽</h2>
+      <p>各重點地點的代表性照片,協助行前建立印象。所有圖片皆取自 Wikimedia Commons(自由／CC 授權),並附上原始檔案頁連結供查核；實際景觀請以現場為準。</p>
+    </div>
+    <div class="gallery-groups">
+
+      <div class="gallery-group">
+        <h3>🏠 住宿:江東區大島(住宅區)</h3>
+        <p class="g-sub">此區為一般住宅區,無適合公開授權之代表照片;實際位置與周邊請參考總覽中的 Google Maps 連結。</p>
+      </div>
+
+      <div class="gallery-group">
+        <h3>鎌倉高校前 · 江之島 · 熱海城 · 熱海海上花火大會</h3>
+        <p class="g-sub">Day 2（7/26）私人包車路線代表地點</p>
+        <div class="photo-grid">
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kamakura_High_School_Front_Level_Crossing_(53150350198).jpg?width=800" alt="鎌倉高校前平交道(灌籃高手取景地)" loading="lazy">
+            <figcaption>鎌倉高校前平交道 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Kamakura_High_School_Front_Level_Crossing_(53150350198).jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Enoshima_06.jpg?width=800" alt="江之島遠景" loading="lazy">
+            <figcaption>江之島 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Enoshima_06.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Atami_Castle2024.jpg?width=800" alt="熱海城" loading="lazy">
+            <figcaption>熱海城 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Atami_Castle2024.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="gallery-group">
+        <h3>表參道 · 明治神宮</h3>
+        <p class="g-sub">Day 3（7/27）分組行動的表參道商圈</p>
+        <div class="photo-grid">
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Meiji_Shrine_Tokyo,_Japan.jpg?width=800" alt="明治神宮" loading="lazy">
+            <figcaption>明治神宮 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Meiji_Shrine_Tokyo,_Japan.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Courtyard_of_Meiji_Shrine_20190717.jpg?width=800" alt="明治神宮御社殿前庭" loading="lazy">
+            <figcaption>明治神宮境內 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Courtyard_of_Meiji_Shrine_20190717.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/TOKYU_PLAZA_Omotesando_Harajuku_4.jpg?width=800" alt="表參道 Tokyu Plaza 商圈街景" loading="lazy">
+            <figcaption>表參道商圈 · 來源:<a href="https://commons.wikimedia.org/wiki/File:TOKYU_PLAZA_Omotesando_Harajuku_4.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="gallery-group">
+        <h3>皮褸巡店:上野阿美橫丁一帶</h3>
+        <p class="g-sub">Day 3（7/27）上野 → 惠比壽 → 神宮前路線起點街景</p>
+        <div class="photo-grid">
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ameyoko_Ueno_Tokyo_Japan.jpg?width=800" alt="上野阿美橫丁商店街" loading="lazy">
+            <figcaption>上野阿美橫丁 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Ameyoko_Ueno_Tokyo_Japan.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ameyayokocho_Shops.JPG?width=800" alt="阿美橫丁店家街景" loading="lazy">
+            <figcaption>阿美橫丁店家 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Ameyayokocho_Shops.JPG" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="gallery-group">
+        <h3>東京迪士尼海洋</h3>
+        <p class="g-sub">Day 4（7/28）全日行程。園區內部照片多受版權／商標限制,此處採用空拍全景。</p>
+        <div class="photo-grid">
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tokyo_Disney_Sea_Aerial_2019.png?width=800" alt="東京迪士尼海洋空拍全景" loading="lazy">
+            <figcaption>東京迪士尼海洋(空拍) · 來源:<a href="https://commons.wikimedia.org/wiki/File:Tokyo_Disney_Sea_Aerial_2019.png" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="gallery-group">
+        <h3>淺草寺 · 東京晴空塔</h3>
+        <p class="g-sub">Day 5（7/29）淺草／晴空塔行程</p>
+        <div class="photo-grid">
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Senso-ji_Kaminarimon_201503a.jpg?width=800" alt="淺草寺雷門" loading="lazy">
+            <figcaption>淺草寺 雷門 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Senso-ji_Kaminarimon_201503a.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sensoji_Temple_(Asakusa,_Tokyo,_Japan)_2023-07-02.jpg?width=800" alt="淺草寺本堂" loading="lazy">
+            <figcaption>淺草寺 本堂 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Sensoji_Temple_(Asakusa,_Tokyo,_Japan)_2023-07-02.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tokyo_Skytree_Night_View.jpg?width=800" alt="東京晴空塔夜景" loading="lazy">
+            <figcaption>東京晴空塔 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Tokyo_Skytree_Night_View.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="gallery-group">
+        <h3>箱根:蘆之湖 · 大涌谷 · 箱根神社</h3>
+        <p class="g-sub">Day 6（7/30）箱根一日包車代表地點</p>
+        <div class="photo-grid">
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/LakeAshi_and_MtFuji_Hakone.JPG?width=800" alt="蘆之湖與富士山" loading="lazy">
+            <figcaption>蘆之湖與富士山 · 來源:<a href="https://commons.wikimedia.org/wiki/File:LakeAshi_and_MtFuji_Hakone.JPG" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hakone_Volcano_2015-03-05_(16110062933).jpg?width=800" alt="大涌谷火山地熱景觀" loading="lazy">
+            <figcaption>大涌谷 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Hakone_Volcano_2015-03-05_(16110062933).jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hakone_Shrine_1st_Torii_Gate.jpg?width=800" alt="箱根神社水中鳥居" loading="lazy">
+            <figcaption>箱根神社 鳥居 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Hakone_Shrine_1st_Torii_Gate.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="gallery-group">
+        <h3>神保町 · 日本橋 · 銀座</h3>
+        <p class="g-sub">Day 7（7/31）分組路線代表地點</p>
+        <div class="photo-grid">
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nihonbashi_Bridge_(5765349567).jpg?width=800" alt="日本橋" loading="lazy">
+            <figcaption>日本橋 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Nihonbashi_Bridge_(5765349567).jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ginza_Wako_20241021.jpg?width=800" alt="銀座和光大樓" loading="lazy">
+            <figcaption>銀座 和光 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Ginza_Wako_20241021.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/2019_Ginza_Mitsukoshi.jpg?width=800" alt="銀座三越百貨" loading="lazy">
+            <figcaption>銀座 三越 · 來源:<a href="https://commons.wikimedia.org/wiki/File:2019_Ginza_Mitsukoshi.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="gallery-group">
+        <h3>酒酒井 Premium Outlets</h3>
+        <p class="g-sub">Day 8（8/1）返程日購物點</p>
+        <div class="photo-grid">
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Shisui_Premium_Outlets_01.JPG?width=800" alt="酒酒井 Premium Outlets 商場外觀" loading="lazy">
+            <figcaption>酒酒井 Premium Outlets · 來源:<a href="https://commons.wikimedia.org/wiki/File:Shisui_Premium_Outlets_01.JPG" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chiba_Kotsu_92-21_Shisui_Premium_Outlet_Shuttle.jpg?width=800" alt="酒酒井 Outlet ⇄ 機場接駁巴士" loading="lazy">
+            <figcaption>Outlet 接駁巴士 · 來源:<a href="https://commons.wikimedia.org/wiki/File:Chiba_Kotsu_92-21_Shisui_Premium_Outlet_Shuttle.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a></figcaption>
+          </figure>
+        </div>
+      </div>
+
+    </div>
+    <p class="gallery-note">📌 圖片版權說明:以上照片均來自 Wikimedia Commons,採 Creative Commons 或公有領域授權。每張圖片下方連結可開啟原始檔案頁,查看確切授權條款與作者姓名(部分授權如 CC BY-SA 於正式印刷／商用時需標註作者)。若有任一圖片日後於 Commons 被移除,對應位置將顯示空白,屆時可再行替換。</p>
   </div>
 </section>
 
