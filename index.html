@@ -147,6 +147,9 @@ h1{font-size:var(--text-2xl)}
 .split-badge{display:inline-block;padding:.16rem .65rem;border-radius:var(--radius-full);
   font-size:var(--text-xs);font-weight:600;background:var(--color-primary-highlight);
   color:var(--color-primary-hover);white-space:nowrap;font-family:var(--font-body)}
+.weather-badge{margin-left:auto;display:inline-flex;align-items:center;gap:.35em;
+  padding:.2rem .7rem;border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:600;
+  white-space:nowrap;font-family:var(--font-body);background:var(--color-surface-dynamic);color:var(--color-text)}
 .track-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-4);margin-top:var(--space-2)}
 .track-grid-3{grid-template-columns:repeat(3,1fr)}
 .track{padding:var(--space-4);border-radius:var(--radius-md);background:var(--color-surface-2);
@@ -303,7 +306,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
     <div class="timeline">
 
       <article class="day-card">
-        <div class="day-head"><span class="label">Day 1</span><strong>7/25（六）</strong><h3>抵達東京 · 入住江東區大島</h3></div>
+        <div class="day-head"><span class="label">Day 1</span><strong>7/25（六）</strong><span class="weather-badge">⛈️ 有雷雨風險，建議帶傘</span><h3>抵達東京 · 入住江東區大島</h3></div>
         <ul class="day-list">
           <li><span class="time-tag">08:15</span>CX526 HKG T1 起飛。</li>
           <li><span class="time-tag">13:40</span>抵達 NRT T2，私人接機專車（10座海獅）於機場等候，免費等待90分鐘。</li>
@@ -313,7 +316,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       </article>
 
       <article class="day-card">
-        <div class="day-head"><span class="label">Day 2</span><strong>7/26（日）</strong><h3>豐州市場 · 鎌倉 · 江之島 · 熱海海上花火大會<span class="split-badge">私人包車</span></h3></div>
+        <div class="day-head"><span class="label">Day 2</span><strong>7/26（日）</strong><span class="weather-badge">🌥️ 夜間有雷雨風險，建議帶傘</span><h3>豐州市場 · 鎌倉 · 江之島 · 熱海海上花火大會<span class="split-badge">私人包車</span></h3></div>
         <ul class="day-list">
           <li><span class="time-tag">10:00</span>豐州市場自由參觀（場外／場內市場，可提早享用海鮮早午餐），約2小時。</li>
           <li><span class="time-tag">13:00</span>Airbnb出發，豪華7座私人包車（10小時，往返Airbnb）。</li>
@@ -324,7 +327,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       </article>
 
       <article class="day-card">
-        <div class="day-head"><span class="label">Day 3</span><strong>7/27（一）</strong><h3>表參道商圈 · 皮褸巡店<span class="split-badge">分組行動</span></h3></div>
+        <div class="day-head"><span class="label">Day 3</span><strong>7/27（一）</strong><span class="weather-badge">⛈️ 早晚有雷雨風險，建議帶傘</span><h3>表參道商圈 · 皮褸巡店<span class="split-badge">分組行動</span></h3></div>
         <div class="track-grid">
           <div class="track">
             <div class="track-title">🅰 Cherry + LokSang</div>
@@ -351,7 +354,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       </article>
 
       <article class="day-card">
-        <div class="day-head"><span class="label">Day 4</span><strong>7/28（二）</strong><h3>東京迪士尼海洋 全日</h3></div>
+        <div class="day-head"><span class="label">Day 4</span><strong>7/28（二）</strong><span class="weather-badge">🌧️ 早晚有雨，建議帶傘</span><h3>東京迪士尼海洋 全日</h3></div>
         <ul class="day-list">
           <li><span class="time-tag">全日</span>官方開園時間 9:00–21:00，惟現場實際開放常提早至 8:45，建議預留排隊緩衝。</li>
           <li>建議事前於官方 App 完成入園時段 / 優先入場預約。</li>
@@ -359,7 +362,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       </article>
 
       <article class="day-card">
-        <div class="day-head"><span class="label">Day 5</span><strong>7/29（三）</strong><h3>淺草寺 · 晴空塔 · 銀座<span class="split-badge">全員同行</span></h3></div>
+        <div class="day-head"><span class="label">Day 5</span><strong>7/29（三）</strong><span class="weather-badge">🌦️ 早上有陣雨，建議帶傘</span><h3>淺草寺 · 晴空塔 · 銀座<span class="split-badge">全員同行</span></h3></div>
         <ul class="day-list">
           <li><span class="time-tag">10:00</span>淺草寺參拜（境內全日開放，本堂約 6:00–17:00）</li>
           <li><span class="time-tag">12:00</span>午餐：首選烤肉 敘敘苑；附近亦有迴轉壽司（元祖壽司 / 壽司郎）可作備案</li>
@@ -371,7 +374,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       </article>
 
       <article class="day-card">
-        <div class="day-head"><span class="label">Day 6</span><strong>7/30（四）</strong><h3>箱根一日包車<span class="split-badge">私人包車</span></h3></div>
+        <div class="day-head"><span class="label">Day 6</span><strong>7/30（四）</strong><span class="weather-badge">☀️ 天氣較穩定，雨具備用即可</span><h3>箱根一日包車<span class="split-badge">私人包車</span></h3></div>
         <ul class="day-list">
           <li><span class="time-tag">08:00</span>Airbnb出發，豪華7座私人包車（10小時，往返Airbnb），超時費¥5,000日圓/小時。</li>
           <li>路線：蘆之湖遊船（元箱根港可望見箱根神社水中鳥居＋富士山）→ 大涌谷（黑蛋名物，如遇纜車停駛包車可直接由公路接駁）→ 箱根雕刻之森美術館（9:00–17:00，入館至閉館前30分）→ 箱根神社。</li>
@@ -380,7 +383,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       </article>
 
       <article class="day-card">
-        <div class="day-head"><span class="label">Day 7</span><strong>7/31（五）</strong><h3>神保町 · 銀座<span class="split-badge">分組行動</span></h3></div>
+        <div class="day-head"><span class="label">Day 7</span><strong>7/31（五）</strong><span class="weather-badge">☀️ 炎熱少雨，雨具備用即可</span><h3>神保町 · 銀座<span class="split-badge">分組行動</span></h3></div>
         <div class="track-grid">
           <div class="track">
             <div class="track-title">🅰 Eunice + Joan</div>
@@ -404,7 +407,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       </article>
 
       <article class="day-card">
-        <div class="day-head"><span class="label">Day 8</span><strong>8/1（六）</strong><h3>酒酒井 Outlet · 返程<span class="split-badge">計畫可能調整</span></h3></div>
+        <div class="day-head"><span class="label">Day 8</span><strong>8/1（六）</strong><span class="weather-badge">🌦️ 早上有陣雨，建議帶傘</span><h3>酒酒井 Outlet · 返程<span class="split-badge">計畫可能調整</span></h3></div>
         <ul class="day-list">
           <li><span class="time-tag">10:15</span>私人專車（10座海獅）從Airbnb出發，單程送往酒酒井 Premium Outlet，免費等待30分鐘。</li>
           <li>Outlet購物後，暫定自行搭乘酒酒井⇄機場接駁巴士前往成田機場（T1南3出口第30號乘車處／T2三號巴士站臺一樓，單程¥1,300，無需預約、先到先上車；預計搭乘14:45班次，需視抵達Outlet時間調整）。</li>
@@ -904,6 +907,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
           <li>7月下旬東京日均高溫約31–34°C，濕度大，慎防中暑，建議隨身攜帶水及防曬用品。</li>
           <li>熱海花火大會、箱根戶外行程日照時間長，建議準備帽子、風扇及濕紙巾。</li>
           <li>迪士尼海洋、箱根一日遊皆為長時間戶外活動，建議穿著舒適防滑鞋。</li>
+          <li>各日行程卡右上角天氣提示為出發前查詢之預報（7/25–27、7/28–29、8/1 均有雷雨／陣雨風險，建議帶傘；7/30、7/31 較穩定但仍建議備摺疊傘），預報可能隨時間變動，出發前請再查閱最新天氣。</li>
         </ul>
       </article>
       <article class="warn-card">
