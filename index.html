@@ -179,6 +179,12 @@ h1{font-size:var(--text-2xl)}
   color:var(--color-primary);margin-left:.4em}
 
 /* PRODUCT CARD */
+.product-photos{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-3);margin-bottom:var(--space-3)}
+.product-photos figure{margin:0;border-radius:var(--radius-lg);overflow:hidden;
+  background:var(--color-surface-offset);border:1px solid color-mix(in srgb,var(--color-text) 9%,transparent)}
+.product-photos img{width:100%;height:220px;object-fit:cover;display:block}
+.product-photos figcaption{padding:.4rem .6rem;font-size:var(--text-xs);color:var(--color-text-muted);text-align:center}
+@media(max-width:560px){ .product-photos{grid-template-columns:1fr} }
 .product-media{width:100%;min-height:200px;border-radius:var(--radius-lg);
   background:var(--color-surface-offset);display:flex;align-items:center;justify-content:center;
   text-align:center;padding:var(--space-4);margin-bottom:var(--space-3);
@@ -743,8 +749,15 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
           <span class="pill">諏訪田製作所</span>
           <span class="pill">同一天行程：7/31銀座</span>
         </div>
-        <div class="product-media">
-          <span>TODO：商品圖片待補（官方連結因本環境網路限制無法自動抓取，請手動下載後放入此處）</span>
+        <div class="product-photos">
+          <figure>
+            <img src="images/suwada-classic-l-detail.jpg" alt="SUWADA つめ切り CLASSIC (L) 指甲剪特寫" loading="lazy">
+            <figcaption>刃口特寫</figcaption>
+          </figure>
+          <figure>
+            <img src="images/suwada-classic-l-box.jpg" alt="SUWADA つめ切り CLASSIC (L) 禮盒組" loading="lazy">
+            <figcaption>禮盒組（含皮套）</figcaption>
+          </figure>
         </div>
         <div class="product-price">約¥6,500（税込，不含刻字服務；含刻字/皮套禮盒組¥10,230–12,650）</div>
         <div class="info-grid">
