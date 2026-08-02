@@ -219,6 +219,68 @@ h1{font-size:var(--text-2xl)}
 @media(max-width:900px){ .photo-grid{grid-template-columns:repeat(2,1fr)} }
 @media(max-width:560px){ .photo-grid{grid-template-columns:1fr} }
 
+/* ===== ALBUM (旅行相簿與影片) ===== */
+.album-groups{display:grid;gap:var(--space-10)}
+.album-group h3{font-size:var(--text-lg);margin-bottom:.15rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.album-group h3 .count{font-size:var(--text-xs);font-weight:600;color:var(--color-primary);
+  background:var(--color-primary-highlight);padding:.15rem .6rem;border-radius:var(--radius-full)}
+.album-group .g-sub{font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-4)}
+.media-grid{display:flex;gap:var(--space-4);overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x proximity;
+  padding-bottom:.85rem;-webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:var(--color-border) transparent}
+.media-grid::-webkit-scrollbar{height:9px}
+.media-grid::-webkit-scrollbar-track{background:var(--color-surface-offset);border-radius:var(--radius-full)}
+.media-grid::-webkit-scrollbar-thumb{background:var(--color-border);border-radius:var(--radius-full)}
+.media-grid::-webkit-scrollbar-thumb:hover{background:var(--color-primary)}
+.media-item{position:relative;display:block;flex:0 0 calc((100% - 2 * var(--space-4)) / 3);
+  aspect-ratio:4/3;overflow:hidden;scroll-snap-align:start;
+  border-radius:var(--radius-md);background:var(--color-surface-offset);cursor:zoom-in;
+  border:1px solid color-mix(in srgb,var(--color-text) 9%,transparent);box-shadow:var(--shadow-sm);
+  transition:transform .25s ease,box-shadow .25s ease}
+.media-item:hover,.media-item:focus-visible{transform:translateY(-3px);box-shadow:var(--shadow-md);outline:none}
+.media-item:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px}
+.media-item img,.media-item video{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.media-item .m-cap{position:absolute;left:0;right:0;bottom:0;padding:.55rem .7rem;
+  font-size:var(--text-xs);color:#fff;line-height:1.4;
+  background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,0));
+  opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s;pointer-events:none}
+.media-item:hover .m-cap,.media-item:focus-visible .m-cap{opacity:1;transform:translateY(0)}
+.media-item.is-video::after{content:"";position:absolute;inset:0;margin:auto;width:56px;height:56px;
+  border-radius:var(--radius-full);background:rgba(0,0,0,.5) center/22px no-repeat;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E");
+  box-shadow:0 4px 14px rgba(0,0,0,.35);transition:transform .25s;pointer-events:none}
+.media-item.is-video:hover::after{transform:scale(1.08)}
+.media-item .vid-badge{position:absolute;top:.55rem;left:.55rem;z-index:2;
+  font-size:var(--text-xs);font-weight:600;color:#fff;background:rgba(0,0,0,.55);
+  padding:.15rem .55rem;border-radius:var(--radius-full);letter-spacing:.03em}
+@media(max-width:900px){ .media-item{flex-basis:calc((100% - var(--space-4)) / 2)} }
+@media(max-width:560px){ .media-grid{gap:var(--space-3)} .media-item{flex-basis:calc((100% - var(--space-3)) / 2)} }
+@media(max-width:380px){ .media-item{flex-basis:82%} }
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;z-index:100;display:none;place-items:center;
+  background:rgba(8,12,14,.94);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:clamp(.5rem,1.8vw,1.25rem)}
+.lightbox.open{display:grid}
+.lb-stage{max-width:98vw;max-height:96vh;display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.lb-media{max-width:100%;max-height:90vh;display:flex;align-items:center;justify-content:center}
+.lb-media img,.lb-media video{max-width:98vw;max-height:90vh;width:auto;height:auto;
+  border-radius:var(--radius-md);box-shadow:0 24px 70px rgba(0,0,0,.5);background:#000}
+.lb-caption{color:#e7eff1;font-size:var(--text-sm);text-align:center;max-width:70ch}
+.lb-btn{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;
+  display:grid;place-items:center;border-radius:var(--radius-full);color:#fff;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);transition:background .2s,transform .2s}
+.lb-btn:hover{background:rgba(255,255,255,.24)}
+.lb-btn:active{transform:translateY(-50%) scale(.94)}
+.lb-prev{left:clamp(.5rem,3vw,2rem)} .lb-next{right:clamp(.5rem,3vw,2rem)}
+.lb-close{position:absolute;top:clamp(.75rem,2vw,1.5rem);right:clamp(.75rem,2vw,1.5rem);
+  width:46px;height:46px;display:grid;place-items:center;border-radius:var(--radius-full);color:#fff;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);transition:background .2s}
+.lb-close:hover{background:rgba(255,255,255,.24)}
+.lb-counter{position:absolute;top:clamp(.9rem,2vw,1.6rem);left:50%;transform:translateX(-50%);
+  color:#cdd8dc;font-size:var(--text-sm);letter-spacing:.05em}
+@media(max-width:560px){ .lb-btn{width:44px;height:44px} }
+
 /* NOTES */
 .warn-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-5)}
 .warn-card h3{font-size:var(--text-base);margin-bottom:.6rem}
@@ -262,6 +324,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       <a href="#gallery">景點預覽</a>
       <a href="#routemap">路線圖</a>
       <a href="#notes">注意事項</a>
+      <a href="#album">旅行相簿</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="開啟導覽選單" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
     <button class="theme-btn" data-theme-toggle aria-label="切換深色模式">
@@ -294,9 +357,9 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       <h2>行程設計重點</h2>
       <ul class="note-list">
         <li>26/7（日）為熱海海上花火大會確定舉辦日，晚上 20:15–20:40 熱海灣施放；當日全程為私人包車，途經鎌倉高校前、江之島、熱海城。</li>
-        <li>27/7 分組：🅰 Cherry + LokSang（SIDAS表參道店11:30–13:30／午餐後續訪惠比壽西JELADO與神宮前Real McCoy's）　🅱 Lyann + Eunice + duodu + Joan（九州Jangara拉麵原宿店午餐／明治神宮／表參道購物）　🅲 皮褸巡店（上野→惠比壽→神宮前，個人／自由參加）　🅰🅱兩組17:30於Onodera表參道會合晚餐</li>
+        <li>27/7 分組：🅰 Cherry + LokSang（SIDAS表參道店11:30–13:30／午餐後續訪惠比壽西JELADO與神宮前Real McCoy's）　🅱 Lyann + Eunice + duodu + Joan（九州Jangara拉麵原宿店午餐／明治神宮／表參道購物）　🅲 購物團（上野→惠比壽→神宮前，個人／自由參加）　🅰🅱兩組17:30於Onodera表參道會合晚餐</li>
         <li>31/7 分組：🅰 Eunice + Joan（神保町／日本橋／銀座路線）　🅱 Lyann + Cherry + LokSang + duodu（銀座shopping）</li>
-        <li>30/7 箱根為私人包車全日遊，涵蓋蘆之湖遊船、大涌谷、雕刻之森美術館、箱根神社。</li>
+        <li>30/7 箱根為私人包車全日遊，涵蓋蘆之湖遊船、大涌谷、箱根神社。</li>
         <li>8/1 回程日：私人專車先送往酒酒井 Outlet，購物後自行搭接駁巴士往機場（此安排可能調整）。</li>
       </ul>
     </aside>
@@ -312,10 +375,10 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       <table class="charter-table">
         <thead><tr><th>日期</th><th>內容</th><th>車型</th><th>出發時間</th><th>超時費</th></tr></thead>
         <tbody>
-          <tr><td>7/25</td><td>成田機場→Airbnb 單接機（CX526）</td><td>10座海獅</td><td>依航班落地（13:40）</td><td>¥5/分鐘（免費等待90分）</td></tr>
+          <tr><td>7/25</td><td>成田機場→Airbnb 單接機（CX526）</td><td>10座豐田海獅</td><td>依航班落地（13:40）</td><td>¥5/分鐘（免費等待90分）</td></tr>
           <tr><td>7/26</td><td>Airbnb⇄鎌倉⇄江之島⇄熱海⇄Airbnb（10小時）</td><td>豪華7座</td><td>13:00</td><td>¥5,000日圓/小時</td></tr>
-          <tr><td>7/30</td><td>Airbnb⇄箱根（蘆之湖／大涌谷／雕刻之森／箱根神社）⇄Airbnb（10小時）</td><td>豪華7座</td><td>08:00</td><td>¥5,000日圓/小時</td></tr>
-          <tr><td>8/1</td><td>Airbnb→酒酒井Outlet 單程專送</td><td>10座海獅</td><td>10:15</td><td>¥5/分鐘（免費等待30分）</td></tr>
+          <tr><td>7/30</td><td>Airbnb⇄箱根（蘆之湖／大涌谷／箱根神社）⇄Airbnb（10小時）</td><td>豪華7座</td><td>08:00</td><td>¥5,000日圓/小時</td></tr>
+          <tr><td>8/1</td><td>Airbnb→酒酒井Outlet 單程專送</td><td>10座豐田海獅</td><td>10:15</td><td>¥5/分鐘（免費等待30分）</td></tr>
         </tbody>
       </table>
       </div>
@@ -334,7 +397,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
         <div class="day-head"><span class="label">Day 1</span><strong>7/25（六）</strong><span class="weather-badge">⛈️ 有雷雨風險，建議帶傘</span><h3>抵達東京 · 入住江東區大島</h3></div>
         <ul class="day-list">
           <li><span class="time-tag">08:15</span>CX526 HKG T1 起飛。</li>
-          <li><span class="time-tag">13:40</span>抵達 NRT T2，私人接機專車（10座海獅）於機場等候，免費等待90分鐘。</li>
+          <li><span class="time-tag">13:40</span>抵達 NRT T2，私人接機專車（10座豐田海獅）於機場等候，免費等待90分鐘。</li>
           <li><span class="time-tag">16:00</span>專車直送 Airbnb（大島）辦理入住，稍作休息。</li>
           <li><span class="time-tag">17:30</span>晚餐：豬排檍 銀座8丁目店（東京都中央区銀座8-8-7 第3ソワレ・ドビル B1F）。</li>
         </ul>
@@ -352,13 +415,13 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       </article>
 
       <article class="day-card">
-        <div class="day-head"><span class="label">Day 3</span><strong>7/27（一）</strong><span class="weather-badge">⛈️ 早晚有雷雨風險，建議帶傘</span><h3>表參道商圈 · 皮褸巡店<span class="split-badge">分組行動</span></h3></div>
+        <div class="day-head"><span class="label">Day 3</span><strong>7/27（一）</strong><span class="weather-badge">⛈️ 早晚有雷雨風險，建議帶傘</span><h3>表參道商圈 · 購物團<span class="split-badge">分組行動</span></h3></div>
         <div class="track-grid">
           <div class="track">
             <div class="track-title">🅰 Cherry + LokSang</div>
             <ul class="day-list">
               <li><span class="time-tag">11:30</span>SIDAS Fitting Lab 表參道店（客製鞋墊檢測，約至13:30）</li>
-              <li><span class="time-tag">13:30</span>午餐（表參道／神宮前一帶，可選 Maisen 豬排 神宮前4-8-5，鄰近SIDAS）</li>
+              <li><span class="time-tag">13:30</span>午餐（原宿燒肉）</li>
               <li><span class="time-tag">14:15</span>移動→惠比壽西 JELADO Flagship Store（山手線原宿⇄惠比壽約15–20分鐘含步行，選購約40分）</li>
               <li><span class="time-tag">15:15</span>移動→神宮前 The Real McCoy's（山手線惠比壽⇄原宿約15–20分鐘含步行，選購約40分）</li>
               <li><span class="time-tag">16:15</span>步行返回表參道一帶，緩衝時間約1小時</li>
@@ -389,8 +452,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       <article class="day-card">
         <div class="day-head"><span class="label">Day 5</span><strong>7/29（三）</strong><span class="weather-badge">🌦️ 早上有陣雨，建議帶傘</span><h3>淺草寺 · 晴空塔 · 銀座<span class="split-badge">全員同行</span></h3></div>
         <ul class="day-list">
-          <li><span class="time-tag">10:00</span>淺草寺參拜（境內全日開放，本堂約 6:00–17:00）</li>
-          <li><span class="time-tag">12:00</span>午餐：首選烤肉 敘敘苑；附近亦有迴轉壽司（元祖壽司 / 壽司郎）可作備案</li>
+          <li><span class="time-tag">12:00</span>午餐：晴空塔 摩天樓鐵板燒</li>
           <li><span class="time-tag">13:30</span>東京晴空塔（平日 10:00–22:00）＋ 寶可夢中心晴空塔城店（10:00–21:00）</li>
           <li><span class="time-tag">15:30</span>銀座shopping</li>
           <li><span class="time-tag">16:00</span>藥妝店補給</li>
@@ -402,7 +464,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
         <div class="day-head"><span class="label">Day 6</span><strong>7/30（四）</strong><span class="weather-badge">☀️ 天氣較穩定，雨具備用即可</span><h3>箱根一日包車<span class="split-badge">私人包車</span></h3></div>
         <ul class="day-list">
           <li><span class="time-tag">08:00</span>Airbnb出發，豪華7座私人包車（10小時，往返Airbnb），超時費¥5,000日圓/小時。</li>
-          <li>路線：蘆之湖遊船（元箱根港可望見箱根神社水中鳥居＋富士山）→ 大涌谷（黑蛋名物，如遇纜車停駛包車可直接由公路接駁）→ 箱根雕刻之森美術館（9:00–17:00，入館至閉館前30分）→ 箱根神社。</li>
+          <li>路線：蘆之湖遊船（元箱根港可望見箱根神社水中鳥居＋富士山）→ 大涌谷（黑蛋名物，如遇纜車停駛包車可直接由公路接駁）→ 箱根神社。</li>
           <li><span class="time-tag">傍晚</span>返回Airbnb，晚餐可自由安排。</li>
         </ul>
       </article>
@@ -434,7 +496,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       <article class="day-card">
         <div class="day-head"><span class="label">Day 8</span><strong>8/1（六）</strong><span class="weather-badge">🌦️ 早上有陣雨，建議帶傘</span><h3>酒酒井 Outlet · 返程<span class="split-badge">計畫可能調整</span></h3></div>
         <ul class="day-list">
-          <li><span class="time-tag">10:15</span>私人專車（10座海獅）從Airbnb出發，單程送往酒酒井 Premium Outlet，免費等待30分鐘。</li>
+          <li><span class="time-tag">10:15</span>私人專車（10座豐田海獅）從Airbnb出發，單程送往酒酒井 Premium Outlet，免費等待30分鐘。</li>
           <li>Outlet購物後，暫定自行搭乘酒酒井⇄機場接駁巴士前往成田機場（T1南3出口第30號乘車處／T2三號巴士站臺一樓，單程¥1,300，無需預約、先到先上車；預計搭乘14:45班次，需視抵達Outlet時間調整）。</li>
           <li>此段安排可能會更改，建議出發前與家人再確認一次。</li>
           <li><span class="time-tag">18:30</span>CX505 NRT T2 起飛 → 22:20 抵達 HKG T1。</li>
@@ -456,7 +518,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
 
       <article class="info-card">
         <h3>🏠 住宿：江東區大島 BNB</h3>
-        <div class="pill-row"><span class="pill">單一住宿基地</span></div>
+        <div class="pill-row"><span class="pill">單一住宿</span></div>
         <div class="info-grid">
           <div class="info-box">
             <div class="info-label">最近地鐵站</div>
@@ -524,7 +586,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       </article>
 
       <article class="info-card">
-        <h3>皮褸巡店路線：上野 → 惠比壽 → 神宮前</h3>
+        <h3>皮褸路線：上野 → 惠比壽 → 神宮前</h3>
         <div class="pill-row">
           <span class="pill">7/27（一）個人／自由參加</span>
           <span class="pill">不走回頭路</span>
@@ -596,7 +658,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       </article>
 
       <article class="info-card">
-        <h3>箱根：蘆之湖 · 大涌谷 · 雕刻之森 · 箱根神社</h3>
+        <h3>箱根：蘆之湖 · 大涌谷 ·  箱根神社</h3>
         <div class="pill-row">
           <span class="pill">私人包車 10小時</span>
           <span class="pill">08:00 出發</span>
@@ -613,10 +675,6 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
           <div class="info-box">
             <div class="info-label">大涌谷</div>
             <p>火山地熱景觀、黑蛋名物；纜車自2026年4月起全線通年運行，但強風、雷雨或火山氣體濃度異常時會臨時停駛，包車若遇停駛可改由公路直接接駁。</p>
-          </div>
-          <div class="info-box">
-            <div class="info-label">箱根雕刻之森美術館</div>
-            <p>戶外雕塑美術館，9:00–17:00開館，入館至閉館前30分鐘為止，全年無休。</p>
           </div>
           <div class="info-box">
             <div class="info-label">箱根神社</div>
@@ -672,7 +730,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
         <div class="info-grid">
           <div class="info-box">
             <div class="info-label">去程：Airbnb → Outlet</div>
-            <p>私人專車（10座海獅）10:15從Airbnb出發單程直送，免費等待30分鐘。</p>
+            <p>私人專車（10座豐田海獅）10:15從Airbnb出發單程直送，免費等待30分鐘。</p>
           </div>
           <div class="info-box">
             <div class="info-label">回程：Outlet → 機場（暫定自理）</div>
@@ -682,42 +740,6 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
             <div class="info-label">成田機場車站</div>
             <p>機場本身另有JR成田線、京成本線「成田空港駅」（第1航廈）／「空港第2ビル駅」（第2航廈）可轉乘市區，非本次行程使用。</p>
             <span class="metro-tag">🚇 JR成田線／京成本線</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="info-card">
-        <h3>東京國立博物館（東博）· 特別展「空海と真言の名宝」</h3>
-        <div class="pill-row">
-          <span class="pill">7/27（一）休館</span>
-          <span class="pill">7/25、7/31 延長至20:00</span>
-          <span class="pill">特別展展期至9/6</span>
-        </div>
-        <div class="info-grid">
-          <div class="info-box">
-            <div class="info-label">行程週內開放時間一覽（入館截止為閉館前30分）</div>
-            <p>7/25（六）09:30–20:00　7/26（日）09:30–17:00　<strong>7/27（一）休館</strong>　7/28（二）09:30–17:00　7/29（三）09:30–17:00　7/30（四）09:30–17:00　7/31（五）09:30–20:00。7/27已排SIDAS＋燒肉行程，剛好不衝突；建議安排在7/25（延長開放）、7/26、7/28–29（平日人潮較少）或7/31（延長開放）。</p>
-          </div>
-          <div class="info-box">
-            <div class="info-label">門票</div>
-            <p>常設展：一般¥1,000／大學生¥500／高中生以下、18歲未滿、70歲以上免費（須出示證件）。建議線上購票，正門售票窗口尖峰時段常排隊超過30分鐘。</p>
-          </div>
-          <div class="info-box">
-            <div class="info-label">特別展「空海と真言の名宝」（平成館）</div>
-            <p>紀念弘法大師生誕1250年，真言宗十八本山首次全體出動辦展，國寶15件、重要文化財60件共88件寺寶齊聚。前售票已截止，現場僅售當日券：一般¥2,300／大學生¥1,300／高中生¥900（中學生以下及身心障礙人士+1名陪同免費），特別展票可兼看常設展。展品分前期（～8/9）／後期（8/11～），7/25–31造訪期間為前期展示。</p>
-          </div>
-          <div class="info-box">
-            <div class="info-label">前期展示必看（7/14–8/9，涵蓋此行程）</div>
-            <p>《信貴山縁起絵巻》飛倉卷（國寶，奈良朝護孫子寺，平安時代繪卷，7/25–31是少數能看到此卷的時段之一，人潮最密建議一入場先直奔）；《十二天像》（國寶，奈良西大寺）；《金銅錫杖頭》（國寶，香川善通寺，通期展示）；《五大尊像》不動明王／降三世明王（國寶，京都醍醐寺）；弘法大師坐像秘佛特別開帳（和歌山金剛峯寺，位於展覽後段「秘佛開帳」區，亦為排隊熱點）；約40尊真言宗各派佛像，含9件秘佛11尊。</p>
-          </div>
-          <div class="info-box">
-            <div class="info-label">交通方式</div>
-            <p>無停車場，需使用上野公園周邊付費停車場，建議搭電車前往。<a href="https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E5%9B%BD%E7%AB%8B%E5%8D%9A%E7%89%A9%E9%A4%A8%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E4%B8%8A%E9%87%8E%E5%85%AC%E5%9C%9213-9" target="_blank" rel="noopener noreferrer">Google Maps ↗</a></p>
-            <span class="metro-tag">🚇 JR「上野駅」公園口 或 JR「鶯谷駅」南口 步行約10分鐘</span>
-          </div>
-          <div class="info-box">
-            <div class="info-label">付款與中文導覽資源</div>
-            <p>支援信用卡（Visa／Master／JCB／AMEX／Diners／DISCOVER）、Suica等交通IC卡、銀聯。官網<a href="https://www.tnm.jp" target="_blank" rel="noopener noreferrer">tnm.jp ↗</a>提供繁體中文版（語言選單與簡體分開列示），建議出發前先查閱展區地圖；常設展另有免費App「トーハクなび」（中日英韓4語言語音導覽，惟App內容多為簡體）。特別展現場付費語音導覽以日文為主，未提供中文版，建議改用官網繁中版展品介紹搭配App對照使用。</p>
           </div>
         </div>
       </article>
@@ -786,7 +808,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
   <div class="container">
     <div class="section-head">
       <h2>景點預覽</h2>
-      <p>各重點地點的代表性照片,協助行前建立印象。所有圖片皆取自 Wikimedia Commons(自由／CC 授權),並附上原始檔案頁連結供查核；實際景觀請以現場為準。</p>
+       
     </div>
     <div class="gallery-groups">
 
@@ -834,7 +856,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       </div>
 
       <div class="gallery-group">
-        <h3>皮褸巡店:上野阿美橫丁一帶</h3>
+        <h3>購物團:上野阿美橫丁一帶</h3>
         <p class="g-sub">Day 3（7/27）上野 → 惠比壽 → 神宮前路線起點街景</p>
         <div class="photo-grid">
           <figure class="photo">
@@ -931,20 +953,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
         </div>
       </div>
 
-      <div class="gallery-group">
-        <h3>東京國立博物館</h3>
-        <p class="g-sub">特別展「空海と真言の名宝」（7/14–9/6），7/27休館</p>
-        <div class="photo-grid">
-          <figure class="photo">
-            <img src="https://s3-ap-northeast-1.amazonaws.com/thegate/2020/12/02/15/24/39/Tokyo%20international%20museum.jpg" alt="東京國立博物館" loading="lazy">
-            <figcaption>東京國立博物館 · 來源:<a href="https://thegate12.com/" target="_blank" rel="noopener noreferrer">THE GATE ↗</a></figcaption>
-          </figure>
-        </div>
-      </div>
 
-    </div>
-    <p class="gallery-note">📌 圖片版權說明:以上照片均來自 Wikimedia Commons,採 Creative Commons 或公有領域授權(東京國立博物館一張除外,來源見圖片下方連結)。每張圖片下方連結可開啟原始檔案頁,查看確切授權條款與作者姓名(部分授權如 CC BY-SA 於正式印刷／商用時需標註作者)。若有任一圖片日後失效,對應位置將顯示空白,屆時可再行替換。</p>
-  </div>
 </section>
 
 <!-- ROUTE MAP -->
@@ -952,7 +961,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
   <div class="container">
     <div class="section-head">
       <h2>路線圖</h2>
-      <p>皮褸巡店路線（7/27）：上野 → 惠比壽 → 神宮前，沿山手線同一方向前進，不走回頭路；🅰組（Cherry + LokSang）SIDAS＋午餐後自表參道出發，走此路線後半段（②③）。</p>
+      <p>皮褸路線（7/27）：上野 → 惠比壽 → 神宮前，沿山手線同一方向前進，不走回頭路；🅰組（Cherry + LokSang）SIDAS＋午餐後自表參道出發，走此路線後半段（②③）。</p>
     </div>
     <div class="info-card">
       <div class="map-frame">
@@ -964,7 +973,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
         </iframe>
       </div>
       <ol class="route-steps">
-        <li><strong>上野 · AMERICAYA GENERAL GARDEN</strong>（Aero Leather）— 10:30出發第一站（僅🅲皮褸巡店組）</li>
+        <li><strong>上野 · AMERICAYA GENERAL GARDEN</strong>（Aero Leather）— 10:30出發第一站（僅🅲購物團組）</li>
         <li><strong>惠比壽西 · JELADO Flagship Store</strong> — 🅲約12:00抵達（JR山手線約20分鐘）；🅰組約14:35抵達（表參道經原宿駅出發，約15–20分鐘）</li>
         <li><strong>神宮前 · The Real McCoy's</strong> — 🅲約13:00抵達（山手線再2站約6分鐘）；🅰組約15:35抵達，之後步行返回表參道銜接17:30 Onodera晚餐</li>
       </ol>
@@ -993,7 +1002,7 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
       <article class="warn-card">
         <h3>分組行動與訂位提醒</h3>
         <ul class="info-points">
-          <li>27/7 分組已確認：🅰 Cherry + LokSang（SIDAS 11:30–13:30 → 午餐 → 惠比壽JELADO → 神宮前Real McCoy's）；🅱 Lyann + Eunice + duodu + Joan（Jangara拉麵午餐 → 明治神宮 → 自由購物）；🅲 皮褸巡店（個人／自由參加，上野→惠比壽→神宮前）；🅰🅱兩組17:30固定於Onodera表參道會合晚餐。31/7 分組：🅰 Eunice + Joan（新增銀座ANCORA皮革店）；🅱 Lyann + Cherry + LokSang + duodu。</li>
+          <li>27/7 分組已確認：🅰 Cherry + LokSang（SIDAS 11:30–13:30 → 午餐 → 惠比壽JELADO → 神宮前Real McCoy's）；🅱 Lyann + Eunice + duodu + Joan（Jangara拉麵午餐 → 明治神宮 → 自由購物）；🅲 購物團（個人／自由參加，上野→惠比壽→神宮前）；🅰🅱兩組17:30固定於Onodera表參道會合晚餐。31/7 分組：🅰 Eunice + Joan（新增銀座ANCORA皮革店）；🅱 Lyann + Cherry + LokSang + duodu。</li>
           <li>🅰組SIDAS結束（13:30）到JELADO開店選購（約14:35起）之間含午餐與約20分鐘轉乘時間，行程較緊湊，如提早結束SIDAS可預留更多購物時間。</li>
           <li>皮褸巡店建議10:30準時到上野開店，若延誤將壓縮到JELADO（12:00開店）與Real McCoy's的時間；全程約3.5–4小時，14:00左右可在神宮前與🅰🅱組會合。</li>
           <li>Onodera 表參道為迴轉壽司形式，一般免預約；如改為坐席套餐用餐，建議提前致電確認。</li>
@@ -1007,11 +1016,145 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
   </div>
 </section>
 
+<!-- TRAVEL ALBUM -->
+<section class="section" id="album">
+  <div class="container">
+    <div class="section-head">
+      <h2>📸 旅行相簿與影片</h2>
+      <p>旅程中實際拍攝的照片與影片，依地點分類整理。點擊任一張即可放大觀看，影片可直接播放；支援電腦、平板與手機瀏覽。</p>
+    </div>
+    <div class="album-groups">
+
+      <div class="album-group">
+        <h3>🏠 住宿 · Airbnb 民宿<span class="count">7 張</span></h3>
+        <p class="g-sub">江東區大島住宅區的家庭民宿，寬敞客房與衛浴。</p>
+        <div class="media-grid">
+          <a class="media-item" href="images/airbnb/1.jpg" data-type="image" data-cap="住宿 · 01"><img src="images/airbnb/1.jpg" alt="住宿 01" loading="lazy"><span class="m-cap">住宿 · 01</span></a>
+          <a class="media-item" href="images/airbnb/2.avif" data-type="image" data-cap="住宿 · 02"><img src="images/airbnb/2.avif" alt="住宿 02" loading="lazy"><span class="m-cap">住宿 · 02</span></a>
+          <a class="media-item" href="images/airbnb/3.jpg" data-type="image" data-cap="住宿 · 03"><img src="images/airbnb/3.jpg" alt="住宿 03" loading="lazy"><span class="m-cap">住宿 · 03</span></a>
+          <a class="media-item" href="images/airbnb/4.avif" data-type="image" data-cap="住宿 · 04"><img src="images/airbnb/4.avif" alt="住宿 04" loading="lazy"><span class="m-cap">住宿 · 04</span></a>
+          <a class="media-item" href="images/airbnb/IMG20260725161129.jpg" data-type="image" data-cap="住宿 · 房間"><img src="images/airbnb/IMG20260725161129.jpg" alt="住宿 房間" loading="lazy"><span class="m-cap">住宿 · 房間</span></a>
+          <a class="media-item" href="images/airbnb/IMG20260727091028.jpg" data-type="image" data-cap="住宿 · 室內"><img src="images/airbnb/IMG20260727091028.jpg" alt="住宿 室內" loading="lazy"><span class="m-cap">住宿 · 室內</span></a>
+          <a class="media-item" href="images/airbnb/IMG20260727091031.jpg" data-type="image" data-cap="住宿 · 室內"><img src="images/airbnb/IMG20260727091031.jpg" alt="住宿 室內" loading="lazy"><span class="m-cap">住宿 · 室內</span></a>
+        </div>
+      </div>
+
+      <div class="album-group">
+        <h3>🏖️ 江之島<span class="count">3 張</span></h3>
+        <p class="g-sub">Day 2（7/26）鎌倉海岸線與江之島風光。</p>
+        <div class="media-grid">
+          <a class="media-item" href="images/江之島/IMG20260726155426.jpg" data-type="image" data-cap="江之島 · 01"><img src="images/江之島/IMG20260726155426.jpg" alt="江之島 01" loading="lazy"><span class="m-cap">江之島 · 01</span></a>
+          <a class="media-item" href="images/江之島/IMG20260726155502.jpg" data-type="image" data-cap="江之島 · 02"><img src="images/江之島/IMG20260726155502.jpg" alt="江之島 02" loading="lazy"><span class="m-cap">江之島 · 02</span></a>
+          <a class="media-item" href="images/江之島/IMG20260726155757.jpg" data-type="image" data-cap="江之島 · 03"><img src="images/江之島/IMG20260726155757.jpg" alt="江之島 03" loading="lazy"><span class="m-cap">江之島 · 03</span></a>
+        </div>
+      </div>
+
+      <div class="album-group">
+        <h3>🎆 熱海海上花火大會<span class="count">1 影片 · 2 張</span></h3>
+        <p class="g-sub">Day 2（7/26）夜晚的熱海海上花火盛會。</p>
+        <div class="media-grid">
+          <a class="media-item is-video" href="images/熱海花火大會/VID20260726203919.mp4" data-type="video" data-cap="熱海花火大會 · 影片"><span class="vid-badge">影片</span><video src="images/熱海花火大會/VID20260726203919.mp4#t=0.5" muted playsinline preload="metadata"></video><span class="m-cap">熱海花火大會 · 影片</span></a>
+          <a class="media-item" href="images/熱海花火大會/IMG20260726200754.jpg" data-type="image" data-cap="熱海花火大會 · 01"><img src="images/熱海花火大會/IMG20260726200754.jpg" alt="熱海花火 01" loading="lazy"><span class="m-cap">熱海花火大會 · 01</span></a>
+          <a class="media-item" href="images/熱海花火大會/IMG20260726201605.jpg" data-type="image" data-cap="熱海花火大會 · 02"><img src="images/熱海花火大會/IMG20260726201605.jpg" alt="熱海花火 02" loading="lazy"><span class="m-cap">熱海花火大會 · 02</span></a>
+        </div>
+      </div>
+
+      <div class="album-group">
+        <h3>👟 SIDAS 鞋墊訂製<span class="count">1 張</span></h3>
+        <p class="g-sub">Day 3（7/27）🅰組表參道 SIDAS 客製鞋墊。</p>
+        <div class="media-grid">
+          <a class="media-item" href="images/SIDAS/IMG20260727111419.jpg" data-type="image" data-cap="SIDAS · 鞋墊訂製"><img src="images/SIDAS/IMG20260727111419.jpg" alt="SIDAS 鞋墊訂製" loading="lazy"><span class="m-cap">SIDAS · 鞋墊訂製</span></a>
+        </div>
+      </div>
+
+      <div class="album-group">
+        <h3>🏰 東京迪士尼海洋<span class="count">1 影片 · 8 張</span></h3>
+        <p class="g-sub">Day 4（7/28）全日暢遊東京迪士尼海洋。</p>
+        <div class="media-grid">
+          <a class="media-item is-video" href="images/Disney/VID20260728170233.mp4" data-type="video" data-cap="迪士尼海洋 · 影片"><span class="vid-badge">影片</span><video src="images/Disney/VID20260728170233.mp4#t=0.5" muted playsinline preload="metadata"></video><span class="m-cap">迪士尼海洋 · 影片</span></a>
+          <a class="media-item" href="images/Disney/IMG20260728100759.jpg" data-type="image" data-cap="迪士尼海洋 · 01"><img src="images/Disney/IMG20260728100759.jpg" alt="迪士尼海洋 01" loading="lazy"><span class="m-cap">迪士尼海洋 · 01</span></a>
+          <a class="media-item" href="images/Disney/IMG20260728101449.jpg" data-type="image" data-cap="迪士尼海洋 · 02"><img src="images/Disney/IMG20260728101449.jpg" alt="迪士尼海洋 02" loading="lazy"><span class="m-cap">迪士尼海洋 · 02</span></a>
+          <a class="media-item" href="images/Disney/IMG20260728104009.jpg" data-type="image" data-cap="迪士尼海洋 · 03"><img src="images/Disney/IMG20260728104009.jpg" alt="迪士尼海洋 03" loading="lazy"><span class="m-cap">迪士尼海洋 · 03</span></a>
+          <a class="media-item" href="images/Disney/IMG20260728151659.jpg" data-type="image" data-cap="迪士尼海洋 · 04"><img src="images/Disney/IMG20260728151659.jpg" alt="迪士尼海洋 04" loading="lazy"><span class="m-cap">迪士尼海洋 · 04</span></a>
+          <a class="media-item" href="images/Disney/IMG20260728162628.jpg" data-type="image" data-cap="迪士尼海洋 · 05"><img src="images/Disney/IMG20260728162628.jpg" alt="迪士尼海洋 05" loading="lazy"><span class="m-cap">迪士尼海洋 · 05</span></a>
+          <a class="media-item" href="images/Disney/IMG20260728165241.jpg" data-type="image" data-cap="迪士尼海洋 · 06"><img src="images/Disney/IMG20260728165241.jpg" alt="迪士尼海洋 06" loading="lazy"><span class="m-cap">迪士尼海洋 · 06</span></a>
+          <a class="media-item" href="images/Disney/IMG20260728170304.jpg" data-type="image" data-cap="迪士尼海洋 · 07"><img src="images/Disney/IMG20260728170304.jpg" alt="迪士尼海洋 07" loading="lazy"><span class="m-cap">迪士尼海洋 · 07</span></a>
+          <a class="media-item" href="images/Disney/IMG20260728182609.jpg" data-type="image" data-cap="迪士尼海洋 · 08"><img src="images/Disney/IMG20260728182609.jpg" alt="迪士尼海洋 08" loading="lazy"><span class="m-cap">迪士尼海洋 · 08</span></a>
+        </div>
+      </div>
+
+      <div class="album-group">
+        <h3>🗼 東京晴空塔<span class="count">3 張</span></h3>
+        <p class="g-sub">Day 5（7/29）淺草／晴空塔一帶。</p>
+        <div class="media-grid">
+          <a class="media-item" href="images/晴空塔/IMG20260729123158.jpg" data-type="image" data-cap="晴空塔 · 01"><img src="images/晴空塔/IMG20260729123158.jpg" alt="晴空塔 01" loading="lazy"><span class="m-cap">晴空塔 · 01</span></a>
+          <a class="media-item" href="images/晴空塔/IMG20260729131942.jpg" data-type="image" data-cap="晴空塔 · 02"><img src="images/晴空塔/IMG20260729131942.jpg" alt="晴空塔 02" loading="lazy"><span class="m-cap">晴空塔 · 02</span></a>
+          <a class="media-item" href="images/晴空塔/IMG20260729134532.jpg" data-type="image" data-cap="晴空塔 · 03"><img src="images/晴空塔/IMG20260729134532.jpg" alt="晴空塔 03" loading="lazy"><span class="m-cap">晴空塔 · 03</span></a>
+        </div>
+      </div>
+
+      <div class="album-group">
+        <h3>⛰️ 箱根<span class="count">8 張</span></h3>
+        <p class="g-sub">Day 6（7/30）箱根一日包車，蘆之湖與大涌谷。</p>
+        <div class="media-grid">
+          <a class="media-item" href="images/箱根/IMG20260730101346.jpg" data-type="image" data-cap="箱根 · 01"><img src="images/箱根/IMG20260730101346.jpg" alt="箱根 01" loading="lazy"><span class="m-cap">箱根 · 01</span></a>
+          <a class="media-item" href="images/箱根/IMG20260730102325.jpg" data-type="image" data-cap="箱根 · 02"><img src="images/箱根/IMG20260730102325.jpg" alt="箱根 02" loading="lazy"><span class="m-cap">箱根 · 02</span></a>
+          <a class="media-item" href="images/箱根/IMG20260730103129.jpg" data-type="image" data-cap="箱根 · 03"><img src="images/箱根/IMG20260730103129.jpg" alt="箱根 03" loading="lazy"><span class="m-cap">箱根 · 03</span></a>
+          <a class="media-item" href="images/箱根/IMG20260730121447.jpg" data-type="image" data-cap="箱根 · 04"><img src="images/箱根/IMG20260730121447.jpg" alt="箱根 04" loading="lazy"><span class="m-cap">箱根 · 04</span></a>
+          <a class="media-item" href="images/箱根/IMG20260730121638.jpg" data-type="image" data-cap="箱根 · 05"><img src="images/箱根/IMG20260730121638.jpg" alt="箱根 05" loading="lazy"><span class="m-cap">箱根 · 05</span></a>
+          <a class="media-item" href="images/箱根/IMG20260730121816.jpg" data-type="image" data-cap="箱根 · 06"><img src="images/箱根/IMG20260730121816.jpg" alt="箱根 06" loading="lazy"><span class="m-cap">箱根 · 06</span></a>
+          <a class="media-item" href="images/箱根/IMG20260730121932.jpg" data-type="image" data-cap="箱根 · 07"><img src="images/箱根/IMG20260730121932.jpg" alt="箱根 07" loading="lazy"><span class="m-cap">箱根 · 07</span></a>
+          <a class="media-item" href="images/箱根/IMG20260730122048.jpg" data-type="image" data-cap="箱根 · 08"><img src="images/箱根/IMG20260730122048.jpg" alt="箱根 08" loading="lazy"><span class="m-cap">箱根 · 08</span></a>
+        </div>
+      </div>
+
+      <div class="album-group">
+        <h3>⛴️ 蘆之湖遊船<span class="count">2 影片</span></h3>
+        <p class="g-sub">Day 6（7/30）蘆之湖遊船航程實錄。</p>
+        <div class="media-grid">
+          <a class="media-item is-video" href="images/蘆之湖遊船/VID20260730103230.mp4" data-type="video" data-cap="蘆之湖遊船 · 影片 01"><span class="vid-badge">影片</span><video src="images/蘆之湖遊船/VID20260730103230.mp4#t=0.5" muted playsinline preload="metadata"></video><span class="m-cap">蘆之湖遊船 · 影片 01</span></a>
+          <a class="media-item is-video" href="images/蘆之湖遊船/VID20260730103701.mp4" data-type="video" data-cap="蘆之湖遊船 · 影片 02"><span class="vid-badge">影片</span><video src="images/蘆之湖遊船/VID20260730103701.mp4#t=0.5" muted playsinline preload="metadata"></video><span class="m-cap">蘆之湖遊船 · 影片 02</span></a>
+        </div>
+      </div>
+
+      <div class="album-group">
+        <h3>🍽️ 餐飲美食<span class="count">10 張</span></h3>
+        <p class="g-sub">旅程中各日的餐飲與美食紀錄。</p>
+        <div class="media-grid">
+          <a class="media-item" href="images/餐飲/IMG20260725193609.jpg" data-type="image" data-cap="餐飲 · 7/25"><img src="images/餐飲/IMG20260725193609.jpg" alt="餐飲 01" loading="lazy"><span class="m-cap">餐飲 · 7/25</span></a>
+          <a class="media-item" href="images/餐飲/IMG20260726175718.jpg" data-type="image" data-cap="餐飲 · 7/26"><img src="images/餐飲/IMG20260726175718.jpg" alt="餐飲 02" loading="lazy"><span class="m-cap">餐飲 · 7/26</span></a>
+          <a class="media-item" href="images/餐飲/IMG20260726180812.jpg" data-type="image" data-cap="餐飲 · 7/26"><img src="images/餐飲/IMG20260726180812.jpg" alt="餐飲 03" loading="lazy"><span class="m-cap">餐飲 · 7/26</span></a>
+          <a class="media-item" href="images/餐飲/IMG20260727132852.jpg" data-type="image" data-cap="餐飲 · 7/27"><img src="images/餐飲/IMG20260727132852.jpg" alt="餐飲 04" loading="lazy"><span class="m-cap">餐飲 · 7/27</span></a>
+          <a class="media-item" href="images/餐飲/IMG20260727180101.jpg" data-type="image" data-cap="餐飲 · 7/27"><img src="images/餐飲/IMG20260727180101.jpg" alt="餐飲 05" loading="lazy"><span class="m-cap">餐飲 · 7/27</span></a>
+          <a class="media-item" href="images/餐飲/IMG20260729192023.jpg" data-type="image" data-cap="餐飲 · 7/29"><img src="images/餐飲/IMG20260729192023.jpg" alt="餐飲 06" loading="lazy"><span class="m-cap">餐飲 · 7/29</span></a>
+          <a class="media-item" href="images/餐飲/IMG20260730182507.jpg" data-type="image" data-cap="餐飲 · 7/30"><img src="images/餐飲/IMG20260730182507.jpg" alt="餐飲 07" loading="lazy"><span class="m-cap">餐飲 · 7/30</span></a>
+          <a class="media-item" href="images/餐飲/IMG20260730183236.jpg" data-type="image" data-cap="餐飲 · 7/30"><img src="images/餐飲/IMG20260730183236.jpg" alt="餐飲 08" loading="lazy"><span class="m-cap">餐飲 · 7/30</span></a>
+          <a class="media-item" href="images/餐飲/IMG20260730184344.jpg" data-type="image" data-cap="餐飲 · 7/30"><img src="images/餐飲/IMG20260730184344.jpg" alt="餐飲 09" loading="lazy"><span class="m-cap">餐飲 · 7/30</span></a>
+          <a class="media-item" href="images/餐飲/IMG20260731195415.jpg" data-type="image" data-cap="餐飲 · 7/31"><img src="images/餐飲/IMG20260731195415.jpg" alt="餐飲 10" loading="lazy"><span class="m-cap">餐飲 · 7/31</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 </main>
 
-<footer>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="相片與影片檢視">
+  <button class="lb-close" id="lbClose" aria-label="關閉"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <div class="lb-counter" id="lbCounter"></div>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="上一張"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <div class="lb-stage">
+    <div class="lb-media" id="lbMedia"></div>
+    <div class="lb-caption" id="lbCaption"></div>
+  </div>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="下一張"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+</div>
+
+<footer
   <div class="container">
-    東京 7/25 – 8/1 家庭旅行計劃（6位成員）· 27/7、31/7 為分組行動日 · 7/26、7/30、8/1 含私人包車 · 資料整理自行程Excel、接送訂單並核實景點交通與開放時間 · 深色模式可切換
+    東京 7/25 – 8/1 家庭旅行計劃（6位成員）· 27/7、31/7 為分組行動日 · 7/26、7/30、8/1 含私人包車
   </div>
 </footer>
 
@@ -1065,6 +1208,102 @@ footer{padding:var(--space-8) 0;color:var(--color-text-faint);font-size:var(--te
   }
   window.addEventListener('scroll', spy, { passive: true });
   spy();
+})();
+
+/* ===== ALBUM LIGHTBOX ===== */
+(function(){
+  const lb      = document.getElementById('lightbox');
+  if(!lb) return;
+  const lbMedia = document.getElementById('lbMedia');
+  const lbCap   = document.getElementById('lbCaption');
+  const lbCount = document.getElementById('lbCounter');
+  const btnClose= document.getElementById('lbClose');
+  const btnPrev = document.getElementById('lbPrev');
+  const btnNext = document.getElementById('lbNext');
+
+  let group = [];   // current group's items
+  let index = 0;
+  let lastFocus = null;
+
+  function render(){
+    const item = group[index];
+    if(!item) return;
+    const src  = item.getAttribute('href');
+    const type = item.getAttribute('data-type');
+    const cap  = item.getAttribute('data-cap') || '';
+    lbMedia.innerHTML = '';
+    if(type === 'video'){
+      const v = document.createElement('video');
+      v.src = src; v.controls = true; v.autoplay = true; v.playsInline = true;
+      v.volume = 0.2;
+      v.addEventListener('loadedmetadata', () => { v.volume = 0.2; }, { once: true });
+      lbMedia.appendChild(v);
+    } else {
+      const img = document.createElement('img');
+      img.src = src; img.alt = cap;
+      lbMedia.appendChild(img);
+    }
+    lbCap.textContent = cap;
+    lbCount.textContent = (index + 1) + ' / ' + group.length;
+    const multi = group.length > 1;
+    btnPrev.style.display = multi ? '' : 'none';
+    btnNext.style.display = multi ? '' : 'none';
+  }
+  function stopVideo(){
+    const v = lbMedia.querySelector('video');
+    if(v){ try{ v.pause(); }catch(e){} }
+  }
+  function open(item){
+    group = Array.from(item.closest('.media-grid').querySelectorAll('.media-item'));
+    index = group.indexOf(item);
+    lastFocus = document.activeElement;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    render();
+    btnClose.focus();
+  }
+  function close(){
+    stopVideo();
+    lb.classList.remove('open');
+    lbMedia.innerHTML = '';
+    document.body.style.overflow = '';
+    if(lastFocus) lastFocus.focus();
+  }
+  function step(dir){
+    if(group.length < 2) return;
+    stopVideo();
+    index = (index + dir + group.length) % group.length;
+    render();
+  }
+
+  document.querySelectorAll('.media-item').forEach(el => {
+    el.addEventListener('click', e => { e.preventDefault(); open(el); });
+    el.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(el); }
+    });
+    el.setAttribute('tabindex','0');
+    el.setAttribute('role','button');
+  });
+
+  btnClose.addEventListener('click', close);
+  btnPrev.addEventListener('click', () => step(-1));
+  btnNext.addEventListener('click', () => step(1));
+  lb.addEventListener('click', e => { if(e.target === lb) close(); });
+  document.addEventListener('keydown', e => {
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape') close();
+    else if(e.key === 'ArrowLeft') step(-1);
+    else if(e.key === 'ArrowRight') step(1);
+  });
+
+  /* Swipe on touch devices */
+  let sx = 0, sy = 0;
+  lb.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+  lb.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    const dy = e.changedTouches[0].clientY - sy;
+    if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+  }, {passive:true});
 })();
 </script>
 </body>
